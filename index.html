@@ -106,7 +106,7 @@
               <p class="font-semibold text-white text-sm mb-1.5 flex items-center justify-center gap-1">
                 ✨ 씨앗 캡슐을 품은 100% 생분해 바이오매트
               </p>
-              버려지던 농업 폐자원(옥수수대, 볏짚)을 엮어 만든 바이오매트와 빗물에 녹는 씨앗 캡슐이 만나 파괴된 사면의 생태계를 스스로 복원합니다.
+              버려지던 &apos;농업 폐자원(옥수수, 볏짚), 황마끈&apos;을 엮어 만든 바이오매트와 빗물에 녹는 씨앗 캡슐이 만나 파괴된 사면의 생태계를 스스로 복원합니다.
               <div class="mt-2 text-[10px] text-green-200 border-t border-white/10 pt-1.5 flex justify-around">
                 <span>팀명: <strong class="text-white font-bold">푸르리</strong></span>
                 <span>팀원: <strong class="text-white font-bold">강지현, 박정현, 이지우, 이태희</strong></span>
@@ -166,12 +166,14 @@
 
           <!-- 유닛 배너 -->
           <div class="m-4 p-4 bg-green-500 text-white rounded-2xl border-b-4 border-green-700 shadow-sm relative overflow-hidden">
-            <span class="text-[10px] font-black tracking-widest bg-green-600/50 px-2 py-0.5 rounded-full uppercase">
-              YIDP 2026 공모전 부스
-            </span>
+            <div class="flex flex-wrap gap-1 mb-2">
+              <span class="inline-flex items-center justify-center whitespace-nowrap text-[11px] font-black tracking-wide bg-green-600/60 px-2.5 py-1 rounded-full uppercase">
+                YIDP 2026 공모전 부스
+              </span>
+            </div>
             <h2 class="text-xl font-extrabold mt-1 tracking-tight">지구를 살리는 바이오매트</h2>
             <p class="text-xs text-green-100 mt-1 leading-relaxed">
-              버려진 옥수수대와 볏짚으로 흙이 무너지는 사면을 단단히 지키고 생태계를 되살리는 게임식 미션!
+              버려진 옥수수 껍질과 볏짚으로 흙이 무너지는 사면을 단단히 지키고 생태계를 되살리는 게임식 미션!
             </p>
           </div>
 
@@ -377,18 +379,22 @@
               </div>
 
               <!-- 재료 선택 탭 버튼 -->
-              <div class="grid grid-cols-3 gap-2">
-                <button onclick="addMaterial('cornStalk')" id="mat-corn" class="p-3 bg-yellow-400 text-yellow-950 border-yellow-600 border-b-4 rounded-xl flex flex-col items-center justify-between gap-1.5 transition-all text-[11px] font-black cursor-pointer">
-                  <span>옥수수대 (수분 보유)</span>
-                  <span class="bg-white/80 px-2 py-0.5 rounded-full text-[10px]" id="cnt-corn">0 / 3</span>
+              <div class="grid grid-cols-2 gap-2">
+                <button onclick="addMaterial('cornStalk')" id="mat-corn" class="p-2.5 bg-yellow-400 text-yellow-950 border-yellow-600 border-b-4 rounded-xl flex flex-col items-center justify-between gap-1 transition-all text-[11px] font-black cursor-pointer">
+                  <span>옥수수 껍질 (수분 보유)</span>
+                  <span class="bg-white/80 px-2 py-0.5 rounded-full text-[9px]" id="cnt-corn">0 / 3</span>
                 </button>
-                <button onclick="addMaterial('riceStraw')" id="mat-straw" class="p-3 bg-amber-400 text-amber-950 border-amber-600 border-b-4 rounded-xl flex flex-col items-center justify-between gap-1.5 transition-all text-[11px] font-black cursor-pointer">
+                <button onclick="addMaterial('riceStraw')" id="mat-straw" class="p-2.5 bg-amber-400 text-amber-950 border-amber-600 border-b-4 rounded-xl flex flex-col items-center justify-between gap-1 transition-all text-[11px] font-black cursor-pointer">
                   <span>볏짚 (충격 흡수)</span>
-                  <span class="bg-white/80 px-2 py-0.5 rounded-full text-[10px]" id="cnt-straw">0 / 3</span>
+                  <span class="bg-white/80 px-2 py-0.5 rounded-full text-[9px]" id="cnt-straw">0 / 3</span>
                 </button>
-                <button onclick="addMaterial('juteThred')" id="mat-jute" class="p-3 bg-orange-300 text-orange-950 border-orange-500 border-b-4 rounded-xl flex flex-col items-center justify-between gap-1.5 transition-all text-[11px] font-black cursor-pointer">
-                  <span>황마실 (인장 강도)</span>
-                  <span class="bg-white/80 px-2 py-0.5 rounded-full text-[10px]" id="cnt-jute">0 / 3</span>
+                <button onclick="addMaterial('juteThred')" id="mat-jute" class="p-2.5 bg-orange-300 text-orange-950 border-orange-500 border-b-4 rounded-xl flex flex-col items-center justify-between gap-1 transition-all text-[11px] font-black cursor-pointer">
+                  <span>황마끈 (인장 강도)</span>
+                  <span class="bg-white/80 px-2 py-0.5 rounded-full text-[9px]" id="cnt-jute">0 / 3</span>
+                </button>
+                <button onclick="addMaterial('ecoCapsule')" id="mat-capsule" class="p-2.5 bg-emerald-400 text-emerald-950 border-emerald-600 border-b-4 rounded-xl flex flex-col items-center justify-between gap-1 transition-all text-[11px] font-black cursor-pointer">
+                  <span>식물성 공캡슐 (씨앗 보존)</span>
+                  <span class="bg-white/80 px-2 py-0.5 rounded-full text-[9px]" id="cnt-capsule">0 / 2</span>
                 </button>
               </div>
             </div>
@@ -423,7 +429,7 @@
               </div>
               <h3 class="text-xl font-extrabold text-green-700">푸른 방패 설치 완료!</h3>
               <p class="text-xs text-slate-600 leading-relaxed max-w-[280px] mx-auto">
-                옥수수대, 볏짚, 황마를 단단히 고정했습니다. 소각할 필요 없이 자연에 자연스레 녹아 새로운 영양 거름이 될 거예요!
+                옥수수 껍질, 볏짚, 황마끈, 식물성 공캡슐을 단단히 고정했습니다. 소각할 필요 없이 자연에 자연스럽게 녹아서 사라질 거예요!
               </p>
             </div>
           </div>
@@ -1070,7 +1076,8 @@
       let biomatState = {
         cornStalk: 0,
         riceStraw: 0,
-        juteThred: 0
+        juteThred: 0,
+        ecoCapsule: 0
       };
       let matPins = 0;
       let currentStage2Step = 'weaving'; // 'weaving' | 'pinning' | 'complete'
@@ -1096,7 +1103,7 @@
       }
 
       function initStage2() {
-        biomatState = { cornStalk: 0, riceStraw: 0, juteThred: 0 };
+        biomatState = { cornStalk: 0, riceStraw: 0, juteThred: 0, ecoCapsule: 0 };
         matPins = 0;
         currentStage2Step = 'weaving';
 
@@ -1110,13 +1117,22 @@
         document.getElementById('cnt-corn').innerText = "0 / 3";
         document.getElementById('cnt-straw').innerText = "0 / 3";
         document.getElementById('cnt-jute').innerText = "0 / 3";
+        document.getElementById('cnt-capsule').innerText = "0 / 2";
         document.getElementById('weave-percent').innerText = "0%";
         document.getElementById('pin-count-display').innerText = "0 / 5개";
 
         // Enable buttons
-        document.getElementById('mat-corn').disabled = false;
-        document.getElementById('mat-straw').disabled = false;
-        document.getElementById('mat-jute').disabled = false;
+        const btnCorn = document.getElementById('mat-corn');
+        const btnStraw = document.getElementById('mat-straw');
+        const btnJute = document.getElementById('mat-jute');
+        const btnCapsule = document.getElementById('mat-capsule');
+
+        [btnCorn, btnStraw, btnJute, btnCapsule].forEach(btn => {
+          if (btn) {
+            btn.disabled = false;
+            btn.classList.remove('opacity-50');
+          }
+        });
 
         // Reset stage next button
         const nextBtn = document.getElementById('btn-stage2-next');
@@ -1124,17 +1140,22 @@
         nextBtn.className = "w-full py-4 rounded-2xl font-black text-sm border-b-4 bg-slate-200 border-slate-300 text-slate-400 cursor-not-allowed";
         nextBtn.innerText = "대나무 핀 설치로 넘어가기";
 
-        renderStage2Bubble("농가에서 처치 곤란해 함부로 태우거나 버리던 농업 부산물(옥수수대, 볏짚, 황마)을 엮어 100% 생분해 바이오매트를 짜봅시다! 재료 버튼을 각각 3번씩 탭해 채워보세요!");
+        renderStage2Bubble("농가에서 처치 곤란해 함부로 태우거나 버리던 농업 부산물(옥수수 껍질, 볏짚, 황마끈)과 식물성 공캡슐을 엮어 100% 생분해 바이오매트를 짜봅시다! 재료 버튼을 눌러 채워보세요!");
       }
 
       function addMaterial(type) {
-        if (biomatState[type] < 3) {
+        const limit = type === 'ecoCapsule' ? 2 : 3;
+        if (biomatState[type] < limit) {
           sound.playPop();
           biomatState[type]++;
           
           // 카운트 UI 갱신
-          const displayId = type === 'cornStalk' ? 'cnt-corn' : (type === 'riceStraw' ? 'cnt-straw' : 'cnt-jute');
-          document.getElementById(displayId).innerText = `${biomatState[type]} / 3`;
+          let displayId = 'cnt-corn';
+          if (type === 'riceStraw') displayId = 'cnt-straw';
+          else if (type === 'juteThred') displayId = 'cnt-jute';
+          else if (type === 'ecoCapsule') displayId = 'cnt-capsule';
+
+          document.getElementById(displayId).innerText = `${biomatState[type]} / ${limit}`;
 
           // 직조 비주얼 레이어 실시간 생성
           const visual = document.getElementById('weaving-visual');
@@ -1144,21 +1165,31 @@
             element.className = "h-3 w-16 bg-yellow-400 border border-yellow-600 rounded-full opacity-80 transition-all duration-300 transform scale-0";
           } else if (type === 'riceStraw') {
             element.className = "h-2.5 w-20 bg-amber-300 border border-amber-500 rounded opacity-85 rotate-[-3deg] transition-all duration-300 transform scale-0";
-          } else {
+          } else if (type === 'juteThred') {
             element.className = "h-1.5 w-24 bg-orange-400/80 rounded-full shadow-sm transition-all duration-300 transform scale-0";
+          } else if (type === 'ecoCapsule') {
+            element.className = "h-5 w-5 bg-emerald-400 border border-emerald-600 rounded-full shadow-inner flex items-center justify-center text-[10px] animate-pulse transition-all duration-300 transform scale-0";
+            element.innerHTML = "🌱";
           }
           visual.appendChild(element);
           setTimeout(() => element.classList.remove('scale-0'), 20);
 
           // 직조도 퍼센트 계산
-          const total = biomatState.cornStalk + biomatState.riceStraw + biomatState.juteThred;
-          const percent = Math.round((total / 9) * 100);
+          const total = biomatState.cornStalk + biomatState.riceStraw + biomatState.juteThred + biomatState.ecoCapsule;
+          const percent = Math.round((total / 11) * 100);
           document.getElementById('weave-percent').innerText = `${percent}%`;
 
-          if (biomatState[type] === 3) {
-            const btnId = type === 'cornStalk' ? 'mat-corn' : (type === 'riceStraw' ? 'mat-straw' : 'mat-jute');
-            document.getElementById(btnId).disabled = true;
-            document.getElementById(btnId).classList.add('opacity-50');
+          if (biomatState[type] === limit) {
+            let btnId = 'mat-corn';
+            if (type === 'riceStraw') btnId = 'mat-straw';
+            else if (type === 'juteThred') btnId = 'mat-jute';
+            else if (type === 'ecoCapsule') btnId = 'mat-capsule';
+
+            const btn = document.getElementById(btnId);
+            if (btn) {
+              btn.disabled = true;
+              btn.classList.add('opacity-50');
+            }
           }
 
           if (percent === 100) {
@@ -1226,7 +1257,7 @@
             document.getElementById('stage2-pinning-area').classList.add('hidden');
             document.getElementById('stage2-complete-area').classList.remove('hidden');
 
-            renderStage2Bubble("정말 훌륭한 솜씨예요! 100% 천연 성분으로 직조된 매트가 대지를 빈틈없이 지켰어요! 거름이 되기 전 생태계를 되살려 볼까요?", "excited");
+            renderStage2Bubble("정말 훌륭한 솜씨예요! 100% 친환경 천연 성분 매트라 흙사면을 지킨 뒤 자연에 자연스럽게 녹아 사라질 거예요! 이제 생태계를 되살려 볼까요?", "excited");
 
             const nextBtn = document.getElementById('btn-stage2-next');
             nextBtn.disabled = false;
@@ -1312,12 +1343,17 @@
             renderStage3Bubble("빗물에 씨앗 캡슐이 스르르 스스로 녹아내리며 싹틀 채비를 마쳤어요!");
           } else if (waterLevel === 40) {
             renderStage3Bubble("우와! 작고 부드러운 새싹들의 수줍은 첫 발아가 시작되었어요! 🌱", "happy");
-            // 새싹 생성
+            // 새싹 생성 (위로는 줄기, 아래로는 흙속 깊이 뻗는 뿌리 동시 표현)
             plants.innerHTML += `
-              <div class="absolute left-[24%] bottom-[40%] origin-bottom transition-all duration-500 scale-100" id="sprout-1">
-                <svg width="20" height="30" viewBox="0 0 20 30">
-                  <path d="M 10 30 Q 8 15 12 0" stroke="#22c55e" stroke-width="2.5" fill="none" />
-                  <path d="M 12 5 Q 18 2 15 10" fill="#4ade80" />
+              <div class="absolute left-[24%] bottom-[32%] origin-bottom transition-all duration-700 scale-100" id="sprout-1">
+                <svg width="40" height="90" viewBox="0 0 40 90">
+                  <!-- 줄기 & 잎 -->
+                  <path d="M 20 45 Q 15 30 20 15" stroke="#22c55e" stroke-width="3" fill="none" stroke-linecap="round" />
+                  <path d="M 20 20 Q 28 16 23 26" fill="#4ade80" />
+                  <!-- 흙 속 깊이 뻗은 뿌리 (밝은 연노란색으로 시인성 대폭 강화) -->
+                  <path d="M 20 45 Q 12 58 17 85" stroke="#fef08a" stroke-width="2.5" fill="none" stroke-linecap="round" />
+                  <path d="M 20 55 Q 8 64 4 75" stroke="#fbbf24" stroke-width="2" fill="none" stroke-linecap="round" />
+                  <path d="M 20 63 Q 28 70 31 82" stroke="#fef08a" stroke-width="1.8" fill="none" stroke-linecap="round" />
                 </svg>
               </div>
             `;
@@ -1325,21 +1361,31 @@
             renderStage3Bubble("대나무 핀과 식물의 유기적 뿌리 발달이 토양을 아주 꽉 쥐어주어 2차 사면 붕괴를 영구 방지합니다!");
             // 뿌리 시각화 및 두번째 새싹
             plants.innerHTML += `
-              <div class="absolute left-[49%] bottom-[50%] origin-bottom transition-all duration-500 scale-100" id="sprout-2">
-                <svg width="20" height="30" viewBox="0 0 20 30">
-                  <path d="M 10 30 Q 12 12 7 0" stroke="#22c55e" stroke-width="2.5" fill="none" />
-                  <path d="M 7 2 Q 1 1 3 9" fill="#4ade80" />
+              <div class="absolute left-[49%] bottom-[42%] origin-bottom transition-all duration-700 scale-100" id="sprout-2">
+                <svg width="40" height="90" viewBox="0 0 40 90">
+                  <!-- 줄기 & 잎 -->
+                  <path d="M 20 45 Q 25 27 18 13" stroke="#22c55e" stroke-width="3" fill="none" stroke-linecap="round" />
+                  <path d="M 18 18 Q 10 13 14 23" fill="#4ade80" />
+                  <!-- 뿌리 (구불구불 흙 속 깊이) -->
+                  <path d="M 20 45 Q 25 56 20 85" stroke="#fef08a" stroke-width="2.5" fill="none" stroke-linecap="round" />
+                  <path d="M 20 53 Q 30 61 33 72" stroke="#fbbf24" stroke-width="2" fill="none" stroke-linecap="round" />
+                  <path d="M 20 62 Q 11 69 9 79" stroke="#fef08a" stroke-width="1.8" fill="none" stroke-linecap="round" />
                 </svg>
               </div>
             `;
           } else if (waterLevel === 80) {
-            renderStage3Bubble("엄청난 속도로 자라고 있어요! 인위적인 화학 비료 없이도 매트 거름만으로 완벽한 영양분이 공급돼요!", "excited");
+            renderStage3Bubble("엄청난 속도로 자라고 있어요! 인위적인 화학 비료 없이도 100% 생분해되어 자연스럽게 녹아드는 매트 덕분에 자연이 스스로 살아납니다!", "excited");
             // 세번째 새싹 및 기존 싹 거대화
             plants.innerHTML += `
-              <div class="absolute left-[74%] bottom-[60%] origin-bottom transition-all duration-500 scale-100" id="sprout-3">
-                <svg width="20" height="30" viewBox="0 0 20 30">
-                  <path d="M 10 30 Q 9 16 11 0" stroke="#22c55e" stroke-width="2.5" fill="none" />
-                  <path d="M 11 4 Q 17 0 14 8" fill="#4ade80" />
+              <div class="absolute left-[74%] bottom-[52%] origin-bottom transition-all duration-700 scale-100" id="sprout-3">
+                <svg width="40" height="90" viewBox="0 0 40 90">
+                  <!-- 줄기 & 잎 -->
+                  <path d="M 20 45 Q 17 29 21 17" stroke="#22c55e" stroke-width="3" fill="none" stroke-linecap="round" />
+                  <path d="M 21 21 Q 29 17 25 27" fill="#4ade80" />
+                  <!-- 뿌리 (사방으로 흙을 꽉 잡는 구조) -->
+                  <path d="M 20 45 Q 18 60 22 86" stroke="#fef08a" stroke-width="2.5" fill="none" stroke-linecap="round" />
+                  <path d="M 20 52 Q 10 60 8 71" stroke="#fbbf24" stroke-width="2" fill="none" stroke-linecap="round" />
+                  <path d="M 20 61 Q 30 69 32 79" stroke="#fef08a" stroke-width="1.8" fill="none" stroke-linecap="round" />
                 </svg>
               </div>
             `;
