@@ -1,0 +1,6 @@
+{
+  "name": "푸르리 - 100% 생분해 바이오매트 게임",
+  "description": "BMW 영 이노베이터 드림 프로젝트 2026 환경 부문 푸르리 팀의 친환경 토양 보호 및 사면 안정화 시스템 게임형 홍보 웹사이트",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

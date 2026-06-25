@@ -1,0 +1,1567 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>푸르리 - 100% 생분해 바이오매트</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;700;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS Play CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              display: ['Space Grotesk', 'sans-serif'],
+              mono: ['JetBrains Mono', 'monospace'],
+            }
+          }
+        }
+      }
+    </script>
+    
+    <!-- Lucide Icons CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/lucide/dist/umd/lucide.min.js"></script>
+    
+    <!-- Canvas Confetti CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+    <style>
+      /* Smooth transitions and scrollbar hiding */
+      ::-webkit-scrollbar {
+        width: 0px;
+        background: transparent;
+      }
+      .custom-transition {
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      @keyframes float {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-8px) rotate(2deg); }
+      }
+      .floating-mascot {
+        animation: float 3s ease-in-out infinite;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen bg-slate-900 flex items-center justify-center p-0 md:p-6 font-sans antialiased overflow-hidden select-none">
+
+    <!-- 폰 형태의 프레임 (데스크탑에서만 보이고 모바일에서는 꽉 참) -->
+    <div class="w-full h-screen md:h-[840px] md:w-[410px] md:rounded-[48px] md:border-[12px] md:border-slate-950 bg-white relative shadow-2xl flex flex-col overflow-hidden md:ring-8 md:ring-slate-800">
+      
+      <!-- 데스크탑 폰 노치 상단 바 -->
+      <div class="hidden md:flex absolute top-0 left-1/2 -translate-x-1/2 w-36 h-6 bg-slate-950 rounded-b-2xl z-50 items-center justify-center">
+        <div class="w-3 h-3 bg-slate-900 rounded-full mr-2"></div>
+        <div class="w-12 h-1 bg-slate-800 rounded-full"></div>
+      </div>
+
+      <!-- 실제 내부 콘텐츠 영역 (Vite Static / Live Preview 친화형) -->
+      <div class="flex-1 flex flex-col h-full overflow-y-auto relative bg-slate-50" id="app-container">
+        
+        <!-- ==================== 1. INTRO SCREEN ==================== -->
+        <div id="screen-intro" class="absolute inset-0 bg-green-500 text-white flex flex-col justify-between p-6 z-20 custom-transition overflow-y-auto">
+          <div class="text-center pt-8">
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 bg-green-600/50 rounded-full text-xs font-bold mb-3 border border-green-400/30">
+              <i data-lucide="award" class="w-3.5 h-3.5 text-yellow-300"></i>
+              BMW Young Innovator Dream Project 2026
+            </div>
+            <h1 class="text-4xl font-extrabold tracking-tight drop-shadow-md text-white font-display flex flex-col items-center gap-1">
+              <span class="text-green-100 text-lg font-medium">친환경 토양 보호 솔루션</span>
+              <span class="text-yellow-300 text-5xl font-black">푸르리</span>
+            </h1>
+          </div>
+
+          <!-- 중앙 캐릭터 쇼케이스 -->
+          <div class="flex flex-col items-center my-auto py-4">
+            <div class="relative w-44 h-44 flex items-center justify-center bg-white/10 rounded-full backdrop-blur-sm border-2 border-white/20 shadow-xl floating-mascot">
+              <!-- 푸리 Mascot SVG -->
+              <svg width="140" height="140" viewBox="0 0 60 60">
+                <ellipse cx="30" cy="54" rx="16" ry="4" fill="#15803d" opacity="0.4" />
+                <path d="M 12 35 C 5 32 5 25 12 28 Z" fill="#86efac" />
+                <path d="M 48 35 C 55 32 55 25 48 28 Z" fill="#86efac" />
+                <rect x="14" y="18" width="32" height="34" rx="16" fill="#16a34a" />
+                <ellipse cx="30" cy="38" rx="11" ry="11" fill="#4ade80" />
+                <path d="M 28 18 C 24 10 18 10 24 6 C 30 6 30 14 28 18 Z" fill="#86efac" />
+                <path d="M 32 18 C 36 10 42 10 36 6 C 30 6 32 14 32 18 Z" fill="#86efac" />
+                <circle cx="23" cy="28" r="3.5" fill="#1e293b" />
+                <circle cx="24" cy="26.5" r="1.2" fill="#ffffff" />
+                <circle cx="37" cy="28" r="3.5" fill="#1e293b" />
+                <circle cx="38" cy="26.5" r="1.2" fill="#ffffff" />
+                <circle cx="18" cy="33" r="2.5" fill="#fca5a5" opacity="0.9" />
+                <circle cx="42" cy="33" r="2.5" fill="#fca5a5" opacity="0.9" />
+                <path d="M 23 34 Q 30 43 37 34 Z" fill="#ef4444" stroke="#1e293b" stroke-width="1.5" />
+              </svg>
+              <span class="absolute bottom-2 bg-yellow-400 text-green-950 px-3 py-0.5 rounded-full text-xs font-bold shadow-md">
+                캡슐 요정 &apos;푸리&apos;
+              </span>
+            </div>
+
+            <!-- 설명 카드 -->
+            <div class="mt-6 bg-white/10 backdrop-blur-md rounded-2xl p-4 text-center border border-white/25 max-w-[340px] text-xs leading-relaxed text-green-50 shadow-md">
+              <p class="font-semibold text-white text-sm mb-1.5 flex items-center justify-center gap-1">
+                ✨ 씨앗 캡슐을 품은 100% 생분해 바이오매트
+              </p>
+              버려지던 농업 폐자원(옥수수대, 볏짚)을 엮어 만든 바이오매트와 빗물에 녹는 씨앗 캡슐이 만나 파괴된 사면의 생태계를 스스로 복원합니다.
+              <div class="mt-2 text-[10px] text-green-200 border-t border-white/10 pt-1.5 flex justify-around">
+                <span>팀명: <strong class="text-white font-bold">푸르리</strong></span>
+                <span>팀원: <strong class="text-white font-bold">강지현, 박정현, 이지우, 이태희</strong></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 하단 사용자 정보 입력 및 시작하기 -->
+          <div class="w-full pb-8">
+            <form id="intro-form" onsubmit="startGame(event)" class="flex flex-col gap-3">
+              <div class="relative">
+                <input
+                  type="text"
+                  id="user-name-input"
+                  placeholder="체험할 이름을 입력해 주세요!"
+                  maxlength="10"
+                  class="w-full px-5 py-4 bg-white text-slate-800 rounded-2xl border-b-4 border-slate-300 font-bold focus:outline-none focus:border-yellow-400 transition-all text-center text-base placeholder:text-slate-400"
+                />
+                <p id="name-error" class="hidden text-red-100 text-xs text-center mt-1.5 font-bold bg-red-500/50 py-1 rounded-lg"></p>
+              </div>
+              <button
+                type="submit"
+                class="w-full py-4 bg-yellow-400 hover:bg-yellow-300 text-green-950 rounded-2xl font-black text-lg shadow-lg border-b-4 border-yellow-600 active:translate-y-1 active:border-b-0 transition-all flex items-center justify-center gap-2 cursor-pointer"
+              >
+                <i data-lucide="play" class="w-5 h-5 fill-current"></i>
+                모험 시작하기
+              </button>
+            </form>
+          </div>
+        </div>
+
+
+        <!-- ==================== 2. LOBBY SCREEN (MAP) ==================== -->
+        <div id="screen-lobby" class="hidden absolute inset-0 bg-slate-50 flex flex-col justify-between pb-16 z-10 overflow-y-auto">
+          <!-- 상단 게이지 바 -->
+          <div class="bg-white border-b-2 border-slate-200 px-4 py-3 sticky top-0 z-30 flex items-center justify-between shadow-sm">
+            <div class="flex items-center gap-1">
+              <i data-lucide="trees" class="w-6 h-6 text-green-500"></i>
+              <span class="font-extrabold text-slate-800 text-sm tracking-tight">푸르리 복원</span>
+            </div>
+            
+            <div class="flex items-center gap-3">
+              <div class="flex items-center gap-1 text-orange-500 font-extrabold text-sm">
+                <i data-lucide="flame" class="w-[18px] h-[18px] fill-current animate-pulse"></i>
+                <span>1일</span>
+              </div>
+              <div class="flex items-center gap-1 text-cyan-500 font-extrabold text-sm">
+                <i data-lucide="star" class="w-[18px] h-[18px] fill-current"></i>
+                <span id="lobby-gems">0</span>
+              </div>
+              <div class="flex items-center gap-1 text-rose-500 font-extrabold text-sm">
+                <i data-lucide="heart" class="w-[18px] h-[18px] fill-current animate-bounce"></i>
+                <span>5</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 유닛 배너 -->
+          <div class="m-4 p-4 bg-green-500 text-white rounded-2xl border-b-4 border-green-700 shadow-sm relative overflow-hidden">
+            <span class="text-[10px] font-black tracking-widest bg-green-600/50 px-2 py-0.5 rounded-full uppercase">
+              YIDP 2026 공모전 부스
+            </span>
+            <h2 class="text-xl font-extrabold mt-1 tracking-tight">지구를 살리는 바이오매트</h2>
+            <p class="text-xs text-green-100 mt-1 leading-relaxed">
+              버려진 옥수수대와 볏짚으로 흙이 무너지는 사면을 단단히 지키고 생태계를 되살리는 게임식 미션!
+            </p>
+          </div>
+
+          <!-- 말풍선 가이드 캐릭터 -->
+          <div class="px-4 py-2 mt-1">
+            <div class="flex items-center gap-3 w-full" id="lobby-bubble">
+              <div class="flex-shrink-0 floating-mascot">
+                <svg width="60" height="60" viewBox="0 0 60 60">
+                  <rect x="14" y="18" width="32" height="34" rx="16" fill="#22c55e" />
+                  <ellipse cx="30" cy="38" rx="11" ry="11" fill="#86efac" />
+                  <path d="M 28 18 C 24 10 18 10 24 6 C 30 6 30 14 28 18 Z" fill="#4ade80" />
+                  <circle cx="23" cy="28" r="3.5" fill="#1e293b" />
+                  <circle cx="37" cy="28" r="3.5" fill="#1e293b" />
+                  <path d="M 25 35 Q 30 40 35 35" stroke="#1e293b" stroke-width="1.5" stroke-linecap="round" fill="none" />
+                </svg>
+              </div>
+              <div class="relative max-w-[75%] p-4 rounded-2xl border-3 border-green-500 bg-white text-xs font-semibold leading-relaxed shadow-sm text-slate-800" id="lobby-bubble-text">
+                안녕! 가입해 주셔서 감사해요. 미션을 순서대로 클리어해 보세요!
+              </div>
+            </div>
+          </div>
+
+          <!-- 구불구불한 맵 경로 -->
+          <div class="flex-1 py-12 px-6 flex flex-col items-center justify-center gap-10 relative">
+            <div class="absolute top-16 bottom-16 left-1/2 -translate-x-1/2 w-1 border-l-4 border-dashed border-green-300 pointer-events-none"></div>
+
+            <!-- UNIT 1 -->
+            <div class="relative w-full flex justify-center translate-x-[-30px]">
+              <div class="flex flex-col items-center gap-2 max-w-[200px]">
+                <button onclick="goToStage(1)" id="btn-unit-1" class="w-16 h-16 rounded-full border-b-4 bg-yellow-400 border-yellow-600 flex items-center justify-center shadow-lg transition-all z-10 cursor-pointer animate-bounce">
+                  <i data-lucide="star" class="w-7 h-7 text-green-950 fill-yellow-300"></i>
+                </button>
+                <div class="text-center">
+                  <span class="block text-[11px] font-black text-slate-400 tracking-wider">UNIT 1</span>
+                  <span class="block text-xs font-black text-slate-800 leading-tight">위기의 민둥산</span>
+                  <span class="block text-[9px] text-slate-400 leading-tight mt-0.5">기존 플라스틱 매트의 문제점</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- UNIT 2 -->
+            <div class="relative w-full flex justify-center translate-x-[30px]">
+              <div class="flex flex-col items-center gap-2 max-w-[200px]">
+                <button onclick="goToStage(2)" id="btn-unit-2" class="w-16 h-16 rounded-full border-b-4 bg-slate-200 border-slate-400 flex items-center justify-center shadow-lg transition-all z-10 cursor-not-allowed" disabled>
+                  <i data-lucide="lock" class="w-6 h-6 text-slate-400"></i>
+                </button>
+                <div class="text-center">
+                  <span class="block text-[11px] font-black text-slate-400 tracking-wider">UNIT 2</span>
+                  <span class="block text-xs font-black text-slate-400 leading-tight">친환경 푸른 방패</span>
+                  <span class="block text-[9px] text-slate-400 leading-tight mt-0.5">농업 폐자원으로 매트 만들기</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- UNIT 3 -->
+            <div class="relative w-full flex justify-center translate-x-[-20px]">
+              <div class="flex flex-col items-center gap-2 max-w-[200px]">
+                <button onclick="goToStage(3)" id="btn-unit-3" class="w-16 h-16 rounded-full border-b-4 bg-slate-200 border-slate-400 flex items-center justify-center shadow-lg transition-all z-10 cursor-not-allowed" disabled>
+                  <i data-lucide="lock" class="w-6 h-6 text-slate-400"></i>
+                </button>
+                <div class="text-center">
+                  <span class="block text-[11px] font-black text-slate-400 tracking-wider">UNIT 3</span>
+                  <span class="block text-xs font-black text-slate-400 leading-tight">빗물과 생명의 씨앗</span>
+                  <span class="block text-[9px] text-slate-400 leading-tight mt-0.5">비를 내려 캡슐 녹이고 식물 성장</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- UNIT 4 -->
+            <div class="relative w-full flex justify-center translate-x-[20px]">
+              <div class="flex flex-col items-center gap-2 max-w-[200px]">
+                <button onclick="goToStage(4)" id="btn-unit-4" class="w-16 h-16 rounded-full border-b-4 bg-slate-200 border-slate-400 flex items-center justify-center shadow-lg transition-all z-10 cursor-not-allowed" disabled>
+                  <i data-lucide="lock" class="w-6 h-6 text-slate-400"></i>
+                </button>
+                <div class="text-center">
+                  <span class="block text-[11px] font-black text-slate-400 tracking-wider">UNIT 4</span>
+                  <span class="block text-xs font-black text-slate-400 leading-tight">기적의 숲 & 투표하기</span>
+                  <span class="block text-[9px] text-slate-400 leading-tight mt-0.5">응원 투표 완료 및 수료증 발급</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 하단 푸터 -->
+          <div class="px-4 py-3 flex justify-between items-center bg-white border-t border-slate-200 text-[10px] text-slate-400">
+            <span>BMW 영 이노베이터 드림 프로젝트 © 푸르리</span>
+            <button onclick="openResetModal()" class="text-green-500 font-bold hover:underline cursor-pointer">진행도 초기화</button>
+          </div>
+        </div>
+
+
+        <!-- ==================== 3. STAGE 1: CARBON SCREEN ==================== -->
+        <div id="screen-stage1" class="hidden absolute inset-0 bg-slate-950 text-white flex flex-col justify-between p-5 z-10 overflow-y-auto">
+          <!-- 상단 헤더 -->
+          <div class="flex items-center gap-3 bg-slate-900/60 p-3 rounded-2xl border border-slate-800">
+            <button onclick="goBackToLobby()" class="p-1 hover:bg-slate-800 rounded-lg cursor-pointer">
+              <i data-lucide="arrow-left" class="w-5 h-5 text-slate-400"></i>
+            </button>
+            <div>
+              <span class="text-[10px] font-bold text-green-400 block">UNIT 1</span>
+              <span class="font-extrabold text-xs text-white">위기의 민둥산과 탄소 장막</span>
+            </div>
+          </div>
+
+          <!-- 산 시각화 및 연기 오버레이 -->
+          <div class="flex-1 flex flex-col justify-center my-4 gap-4 relative">
+            <div class="p-2" id="stage1-bubble-container">
+              <!-- JS에서 동적 대화가 들어감 -->
+            </div>
+
+            <div class="relative h-44 bg-gradient-to-b from-sky-400 to-sky-600 rounded-3xl overflow-hidden shadow-2xl border-4 border-slate-800" id="mountain-canvas">
+              <div class="absolute top-4 right-4 w-10 h-10 bg-yellow-300 rounded-full blur-[2px]"></div>
+              
+              <!-- 연기 이펙트 레이어 -->
+              <div id="smoke-layer" class="absolute inset-0 pointer-events-none"></div>
+
+              <svg class="absolute bottom-0 left-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <path d="M 0 100 L 0 85 L 100 35 L 100 100 Z" fill="#78350f" />
+                <path id="plastic-mesh" d="M 0 85 L 100 35" stroke="#ef4444" stroke-width="3" stroke-dasharray="4 2" />
+              </svg>
+
+              <div id="burning-flame" class="hidden absolute bottom-12 right-12 text-orange-500 animate-pulse">
+                <i data-lucide="flame" class="w-8 h-8 fill-current"></i>
+              </div>
+
+              <div class="absolute top-2 left-2 bg-slate-950/80 px-2 py-1 rounded-lg text-[10px] font-black border border-slate-700 flex items-center gap-1">
+                <i data-lucide="alert-circle" class="w-3.5 h-3.5 text-red-400"></i>
+                <span id="pollution-display">대기오염도: 0%</span>
+              </div>
+            </div>
+
+            <!-- 터치 소각하기 버튼 -->
+            <button id="btn-burn" onclick="burnPlastic()" class="w-full py-4 rounded-2xl font-black text-sm border-b-4 bg-red-500 border-red-700 hover:bg-red-400 text-white flex items-center justify-center gap-2 shadow-lg transition-all cursor-pointer">
+              <i data-lucide="flame" class="w-[18px] h-[18px]"></i>
+              플라스틱 매트 소각하기 (클릭!)
+            </button>
+
+            <!-- 퀴즈 영역 (처음엔 숨겨짐) -->
+            <div id="stage1-quiz" class="hidden flex flex-col gap-3 animate-fade-in">
+              <div class="bg-slate-900 border-2 border-slate-800 p-4 rounded-2xl">
+                <p class="text-xs font-extrabold text-green-300 mb-2">💡 미니 학습 퀴즈</p>
+                <p class="text-xs font-bold leading-relaxed">기존 플라스틱 토양 그물망 1kg을 전량 소각할 때 배출되는 이산화탄소량은 무려 얼마일까요?</p>
+              </div>
+              <div class="flex flex-col gap-2">
+                <button onclick="checkStage1Quiz(0)" class="quiz-opt w-full p-4 rounded-xl border-2 border-slate-800 bg-slate-900 hover:bg-slate-850 text-slate-200 text-left text-xs transition-all cursor-pointer flex justify-between items-center">
+                  <span>1. 1kg당 1.2kg 탄소 배출</span>
+                </button>
+                <button onclick="checkStage1Quiz(1)" class="quiz-opt w-full p-4 rounded-xl border-2 border-slate-800 bg-slate-900 hover:bg-slate-850 text-slate-200 text-left text-xs transition-all cursor-pointer flex justify-between items-center">
+                  <span>2. 1kg당 2.9kg 탄소 배출</span>
+                </button>
+                <button onclick="checkStage1Quiz(2)" class="quiz-opt w-full p-4 rounded-xl border-2 border-slate-800 bg-slate-900 hover:bg-slate-850 text-slate-200 text-left text-xs transition-all cursor-pointer flex justify-between items-center">
+                  <span>3. 1kg당 5.0kg 탄소 배출</span>
+                </button>
+              </div>
+              <div id="quiz-feedback" class="hidden p-3 rounded-xl border text-xs leading-relaxed"></div>
+            </div>
+          </div>
+
+          <!-- 다음 미션 버튼 -->
+          <div class="pb-4">
+            <button id="btn-stage1-next" onclick="finishStage1()" class="w-full py-4 rounded-2xl font-black text-sm border-b-4 bg-slate-800 border-slate-900 text-slate-500 cursor-not-allowed" disabled>
+              다음 미션 이동하기
+            </button>
+          </div>
+        </div>
+
+
+        <!-- ==================== 4. STAGE 2: BIOMAT WEAVING ==================== -->
+        <div id="screen-stage2" class="hidden absolute inset-0 bg-slate-50 text-slate-800 flex flex-col justify-between p-5 z-10 overflow-y-auto">
+          <!-- 상단 헤더 -->
+          <div class="flex items-center gap-3 bg-white p-3 rounded-2xl border-2 border-slate-200">
+            <button onclick="goBackToLobby()" class="p-1 hover:bg-slate-100 rounded-lg cursor-pointer">
+              <i data-lucide="arrow-left" class="w-5 h-5 text-slate-500"></i>
+            </button>
+            <div>
+              <span class="text-[10px] font-bold text-green-600 block">UNIT 2</span>
+              <span class="font-extrabold text-xs text-slate-800">친환경 바이오매트 짜기</span>
+            </div>
+          </div>
+
+          <!-- 내용물 -->
+          <div class="flex-1 flex flex-col justify-center my-4 gap-4">
+            <div id="stage2-bubble-container"></div>
+
+            <!-- 미션 1: 매트 직조기 -->
+            <div id="stage2-weaving-area" class="flex flex-col gap-4">
+              <div class="h-44 bg-amber-50 rounded-3xl border-3 border-amber-200 overflow-hidden relative flex flex-col items-center justify-center p-3 shadow-inner">
+                <!-- 격자 라인 -->
+                <div class="absolute inset-0 grid grid-cols-6 grid-rows-6 opacity-30 pointer-events-none">
+                  <div class="border-r border-b border-amber-800/20 w-full h-full"></div>
+                  <div class="border-r border-b border-amber-800/20 w-full h-full"></div>
+                  <div class="border-r border-b border-amber-800/20 w-full h-full"></div>
+                  <div class="border-r border-b border-amber-800/20 w-full h-full"></div>
+                </div>
+
+                <div class="w-full h-full relative flex items-center justify-center">
+                  <!-- 동적 직조 결과물 들어갈 공간 -->
+                  <div id="weaving-visual" class="absolute inset-4 rounded-xl flex flex-wrap gap-2 p-2 overflow-hidden"></div>
+                  <div class="absolute bg-white/95 px-4 py-1.5 rounded-full border-2 border-green-500 text-center font-extrabold text-xs text-green-700 shadow-md">
+                    바이오매트 직조율: <span id="weave-percent">0%</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 재료 선택 탭 버튼 -->
+              <div class="grid grid-cols-3 gap-2">
+                <button onclick="addMaterial('cornStalk')" id="mat-corn" class="p-3 bg-yellow-400 text-yellow-950 border-yellow-600 border-b-4 rounded-xl flex flex-col items-center justify-between gap-1.5 transition-all text-[11px] font-black cursor-pointer">
+                  <span>옥수수대 (수분 보유)</span>
+                  <span class="bg-white/80 px-2 py-0.5 rounded-full text-[10px]" id="cnt-corn">0 / 3</span>
+                </button>
+                <button onclick="addMaterial('riceStraw')" id="mat-straw" class="p-3 bg-amber-400 text-amber-950 border-amber-600 border-b-4 rounded-xl flex flex-col items-center justify-between gap-1.5 transition-all text-[11px] font-black cursor-pointer">
+                  <span>볏짚 (충격 흡수)</span>
+                  <span class="bg-white/80 px-2 py-0.5 rounded-full text-[10px]" id="cnt-straw">0 / 3</span>
+                </button>
+                <button onclick="addMaterial('juteThred')" id="mat-jute" class="p-3 bg-orange-300 text-orange-950 border-orange-500 border-b-4 rounded-xl flex flex-col items-center justify-between gap-1.5 transition-all text-[11px] font-black cursor-pointer">
+                  <span>황마실 (인장 강도)</span>
+                  <span class="bg-white/80 px-2 py-0.5 rounded-full text-[10px]" id="cnt-jute">0 / 3</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- 미션 2: 대나무 고정핀 망치질 (처음엔 숨김) -->
+            <div id="stage2-pinning-area" class="hidden flex flex-col gap-4 animate-fade-in">
+              <div class="relative h-44 bg-gradient-to-b from-sky-400 to-sky-600 rounded-3xl overflow-hidden shadow-2xl border-3 border-slate-200">
+                <div class="absolute top-4 right-4 w-10 h-10 bg-yellow-300 rounded-full blur-[2px]"></div>
+                
+                <svg class="absolute bottom-0 left-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                  <path d="M 0 100 L 0 85 L 100 35 L 100 100 Z" fill="#78350f" />
+                  <path d="M 0 85 L 100 35" stroke="#f59e0b" stroke-width="5" stroke-dasharray="3 1" />
+                </svg>
+
+                <!-- 대나무 핀들이 꽂힐 부모 컨테이너 -->
+                <div id="bamboo-pins-container" class="absolute inset-0 pointer-events-none"></div>
+
+                <div class="absolute top-2 left-2 bg-slate-950/80 px-2 py-1 rounded-lg text-[10px] font-black text-white border border-slate-700">
+                  대나무 핀 개수: <span id="pin-count-display">0 / 5개</span>
+                </div>
+              </div>
+
+              <button onclick="hammerPin()" class="w-full py-4 bg-emerald-500 hover:bg-emerald-400 text-white rounded-2xl font-black text-sm border-b-4 border-emerald-700 shadow-lg flex items-center justify-center gap-1.5 cursor-pointer">
+                🎋 대나무 고정핀 망치질하기!
+              </button>
+            </div>
+
+            <!-- 미션 완료 결과물 (처음엔 숨김) -->
+            <div id="stage2-complete-area" class="hidden flex flex-col gap-4 text-center py-6 animate-fade-in">
+              <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto border-3 border-green-500 text-green-600 shadow-md">
+                <i data-lucide="check" class="w-10 h-10"></i>
+              </div>
+              <h3 class="text-xl font-extrabold text-green-700">푸른 방패 설치 완료!</h3>
+              <p class="text-xs text-slate-600 leading-relaxed max-w-[280px] mx-auto">
+                옥수수대, 볏짚, 황마를 단단히 고정했습니다. 소각할 필요 없이 자연에 자연스레 녹아 새로운 영양 거름이 될 거예요!
+              </p>
+            </div>
+          </div>
+
+          <!-- 하단 제어 버튼 -->
+          <div class="pb-4">
+            <button id="btn-stage2-next" onclick="nextStage2Step()" class="w-full py-4 rounded-2xl font-black text-sm border-b-4 bg-slate-200 border-slate-300 text-slate-400 cursor-not-allowed" disabled>
+              대나무 핀 설치로 넘어가기
+            </button>
+          </div>
+        </div>
+
+
+        <!-- ==================== 5. STAGE 3: RAIN FOREST ==================== -->
+        <div id="screen-stage3" class="hidden absolute inset-0 bg-slate-50 text-slate-800 flex flex-col justify-between p-5 z-10 overflow-y-auto">
+          <!-- 상단 헤더 -->
+          <div class="flex items-center gap-3 bg-white p-3 rounded-2xl border-2 border-slate-200">
+            <button onclick="goBackToLobby()" class="p-1 hover:bg-slate-100 rounded-lg cursor-pointer">
+              <i data-lucide="arrow-left" class="w-5 h-5 text-slate-500"></i>
+            </button>
+            <div>
+              <span class="text-[10px] font-bold text-green-600 block">UNIT 3</span>
+              <span class="font-extrabold text-xs text-slate-800">빗물과 생명의 발아</span>
+            </div>
+          </div>
+
+          <!-- 내용물 -->
+          <div class="flex-1 flex flex-col justify-center my-4 gap-4">
+            <div id="stage3-bubble-container"></div>
+
+            <!-- 식물 성장 캔버스 -->
+            <div class="relative h-64 bg-gradient-to-b from-sky-300 via-sky-400 to-amber-100 rounded-3xl overflow-hidden shadow-2xl border-3 border-slate-200">
+              <!-- 구름 -->
+              <div class="absolute top-2 left-8 text-slate-100 opacity-90 pointer-events-none" id="cloud-visual">
+                <svg width="100" height="40" viewBox="0 0 100 40" fill="currentColor">
+                  <path d="M 20 30 A 10 10 0 0 1 30 15 A 15 15 0 0 1 65 10 A 12 12 0 0 1 85 20 A 10 10 0 0 1 80 35 Z" />
+                </svg>
+              </div>
+
+              <!-- 빗소리 연출용 빗방울 레이어 -->
+              <div id="rain-drops-layer" class="absolute inset-0 pointer-events-none"></div>
+
+              <!-- 산 사면 SVG -->
+              <svg class="absolute bottom-0 left-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <path d="M 0 100 L 0 65 L 100 30 L 100 100 Z" fill="#451a03" />
+                <path d="M 0 65 L 0 55 L 100 25 L 100 30 Z" fill="#78350f" opacity="0.9" />
+                <path id="biomat-absorb" d="M 0 55 L 100 25" stroke="#b45309" stroke-width="5" stroke-dasharray="4 2" />
+              </svg>
+
+              <!-- 동적 식물 요소 들어갈 공간 -->
+              <div id="plants-container" class="absolute inset-0 pointer-events-none"></div>
+
+              <div class="absolute top-2 left-2 bg-slate-950/80 px-2.5 py-1 rounded-lg text-[10px] font-black text-white border border-slate-700">
+                토양 수분도: <span id="water-level-display">0%</span>
+              </div>
+
+              <!-- 성공 배너 -->
+              <div id="forest-success-banner" class="hidden absolute inset-0 bg-green-950/20 backdrop-blur-[0.5px] flex items-center justify-center">
+                <div class="bg-green-600 text-white font-bold text-xs px-4 py-2 rounded-full border-2 border-green-300 flex items-center gap-1 shadow-lg">
+                  🎉 사면 안정화 & 생태 복원 성공!
+                </div>
+              </div>
+            </div>
+
+            <!-- 인터랙션 컨트롤 -->
+            <div class="flex gap-2">
+              <button onclick="rainOnSlope()" id="btn-rain" class="flex-1 py-4 rounded-2xl font-black text-sm border-b-4 bg-sky-500 border-sky-700 hover:bg-sky-400 text-white flex items-center justify-center gap-1.5 shadow-lg transition-all cursor-pointer">
+                <i data-lucide="cloud-rain" class="w-5 h-5"></i>
+                하늘에서 비 내리게 하기 (클릭!)
+              </button>
+              <button onclick="resetRain()" class="p-3 bg-white border-2 border-slate-200 hover:bg-slate-50 text-slate-500 rounded-2xl cursor-pointer">
+                <i data-lucide="refresh-cw" class="w-[18px] h-[18px]"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- 하단 제어 버튼 -->
+          <div class="pb-4">
+            <button id="btn-stage3-next" onclick="finishStage3()" class="w-full py-4 rounded-2xl font-black text-sm border-b-4 bg-slate-200 border-slate-300 text-slate-400 cursor-not-allowed" disabled>
+              보석 20개 받고 마지막 유닛 이동!
+            </button>
+          </div>
+        </div>
+
+
+        <!-- ==================== 6. STAGE 4: VOTE & CERTIFICATE ==================== -->
+        <div id="screen-stage4" class="hidden absolute inset-0 bg-slate-50 text-slate-800 flex flex-col justify-between p-5 z-10 overflow-y-auto">
+          <!-- 상단 헤더 -->
+          <div class="bg-white p-3 rounded-2xl border-2 border-slate-200 text-center">
+            <span class="text-[10px] font-bold text-green-600 block tracking-wider">UNIT 4</span>
+            <span class="font-extrabold text-xs text-slate-800">푸르리 온라인 투표 & 서약</span>
+          </div>
+
+          <!-- 메인 내용물 -->
+          <div class="flex-1 flex flex-col justify-center my-4 gap-4">
+            <div id="stage4-bubble-container"></div>
+
+            <!-- 투표 및 동의 폼 화면 -->
+            <div id="vote-form-panel" class="flex flex-col gap-4">
+              <!-- 온라인 응원 투표 카드 -->
+              <div class="bg-white border-3 border-green-500 rounded-2xl p-4 shadow-md text-center relative overflow-hidden">
+                <span class="bg-green-100 text-green-800 font-black text-[10px] px-2.5 py-1 rounded-full uppercase">
+                  YIDP 2026 푸르리 응원관
+                </span>
+                <h3 class="text-base font-extrabold text-slate-800 mt-2">
+                  &quot;푸르리&quot; 팀에게 소중한 한 표를!
+                </h3>
+                <p class="text-[11px] text-slate-500 mt-1 max-w-[280px] mx-auto leading-relaxed">
+                  농업 폐자원을 친환경 복원 생태 바이오매트로 재탄생시킨 푸르리를 적극 투표해 주세요!
+                </p>
+
+                <!-- 투표 수 카운터 -->
+                <div class="my-3 flex items-center justify-center gap-1.5 bg-slate-50 py-2.5 rounded-xl border border-slate-200">
+                  <i data-lucide="heart" class="w-5 h-5 fill-current text-rose-500 animate-pulse" id="vote-heart-icon"></i>
+                  <div>
+                    <span class="block text-[9px] text-slate-400 font-bold uppercase leading-none">현재 득표수</span>
+                    <span class="font-black text-slate-800 text-lg tracking-tight" id="vote-count-display">1,324표</span>
+                  </div>
+                </div>
+
+                <button id="btn-vote" onclick="castVote()" class="w-full py-3 rounded-xl font-black text-xs border-b-4 bg-rose-500 border-rose-700 hover:bg-rose-400 text-white flex items-center justify-center gap-1.5 shadow-md transition-all cursor-pointer">
+                  <i data-lucide="heart" class="w-4 h-4 fill-current"></i>
+                  푸르리 팀에게 투표하기!
+                </button>
+              </div>
+
+              <!-- 환경 서약서 작성 카드 -->
+              <div class="bg-white border-2 border-slate-200 rounded-2xl p-4 shadow-sm">
+                <h4 class="text-xs font-black text-slate-800 mb-2 flex items-center gap-1">
+                  🌱 100% 생분해 환경 실천 서약
+                </h4>
+                <p class="text-[11px] text-slate-500 leading-relaxed mb-3">
+                  지구의 토양 유실을 막고 플라스틱 정화를 위해 아래 환경 수칙을 함께 실천할 것을 서약하시겠습니까?
+                </p>
+                <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 text-[10px] text-slate-600 flex flex-col gap-1.5">
+                  <div class="flex items-start gap-1.5">
+                    <span class="text-green-600 font-bold">1.</span>
+                    <span>야외 여가 시 자연 흙 사면을 훼손하거나 함부로 파헤치지 않습니다.</span>
+                  </div>
+                  <div class="flex items-start gap-1.5">
+                    <span class="text-green-600 font-bold">2.</span>
+                    <span>지구 온난화를 늦추기 위해 일회용 플라스틱 덮개나 제품 배출을 적극적으로 줄입니다.</span>
+                  </div>
+                </div>
+
+                <!-- 동의 체크박스 -->
+                <label class="flex items-center gap-2 mt-3 cursor-pointer select-none">
+                  <input
+                    type="checkbox"
+                    id="pledge-checkbox"
+                    onchange="togglePledge(this.checked)"
+                    class="w-4 h-4 text-green-600 border-slate-300 rounded focus:ring-green-500"
+                  />
+                  <span class="text-xs font-black text-slate-700">
+                    네, 지구를 지킬 것을 약속하고 서약합니다!
+                  </span>
+                </label>
+              </div>
+            </div>
+
+            <!-- 수료증 최종 수여 화면 (처음엔 숨김) -->
+            <div id="certificate-panel" class="hidden flex flex-col gap-4 text-center py-4 animate-fade-in">
+              <div class="bg-amber-50 border-8 border-double border-amber-800 p-6 rounded-2xl shadow-xl relative overflow-hidden flex flex-col justify-between min-h-[360px]">
+                <div class="absolute top-2 left-2 text-amber-800/40 text-xs font-serif">◆</div>
+                <div class="absolute top-2 right-2 text-amber-800/40 text-xs font-serif">◆</div>
+                <div class="absolute bottom-2 left-2 text-amber-800/40 text-xs font-serif">◆</div>
+                <div class="absolute bottom-2 right-2 text-amber-800/40 text-xs font-serif">◆</div>
+
+                <div class="flex flex-col items-center">
+                  <div class="w-10 h-10 bg-amber-800/10 rounded-full flex items-center justify-center border border-amber-800/30 text-amber-900 mb-1">
+                    <i data-lucide="award" class="w-6 h-6"></i>
+                  </div>
+                  <span class="text-[8px] font-black tracking-widest text-amber-800 font-serif uppercase">
+                    Certificate of eco-guardian
+                  </span>
+                  <h3 class="text-base font-black text-amber-950 font-serif mt-0.5">
+                    환경 지킴이 수료증
+                  </h3>
+                </div>
+
+                <div class="my-5">
+                  <span class="text-[9px] text-amber-800 font-serif block">성명</span>
+                  <span id="cert-user-name" class="text-lg font-extrabold text-amber-950 border-b border-amber-800/30 px-6 pb-0.5 inline-block">
+                    체험자 님
+                  </span>
+                  <p class="text-[11px] text-amber-900 leading-relaxed font-serif mt-3 px-1">
+                    귀하는 BMW 영 이노베이터 드림 프로젝트 2026 환경 부문의 &apos;푸르리&apos; 친환경 토양 보호 솔루션을 이수하고, 100% 생분해 바이오매트 가치에 전폭적으로 공감하여 지구 환경 보전에 앞장설 것을 서약하였으므로 이 증서를 수여합니다.
+                  </p>
+                </div>
+
+                <div class="flex justify-between items-end border-t border-amber-800/20 pt-3 text-left">
+                  <div>
+                    <span class="block text-[8px] text-amber-700/80 font-serif">BMW YIDP 2026 환경부문</span>
+                    <span class="text-[9px] font-black text-amber-950 font-serif tracking-tight">
+                      푸르리(Pureuri) 개발 연대
+                    </span>
+                  </div>
+                  <div class="w-8 h-8 border-2 border-red-600 rounded-lg flex items-center justify-center text-red-600 font-black text-[8px] rotate-[-5deg] leading-none text-center">
+                    푸르리<br />인증
+                  </div>
+                </div>
+              </div>
+              <p class="text-[10px] text-slate-400">
+                💡 팁: 위 수료증 화면을 길게 누르거나 화면을 캡처해서 소장해 보세요!
+              </p>
+            </div>
+          </div>
+
+          <!-- 하단 제어 버튼 -->
+          <div class="pb-4">
+            <button id="btn-stage4-next" onclick="issueCertificate()" class="w-full py-4 rounded-2xl font-black text-sm border-b-4 bg-slate-200 border-slate-300 text-slate-400 cursor-not-allowed" disabled>
+              <i data-lucide="award" class="w-4 h-4 mr-1"></i>
+              친환경 지킴이 수료증 발급하기
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 홈 인디케이터 (데스크탑 전용 하단 바) -->
+      <div class="hidden md:block absolute bottom-1 left-1/2 -translate-x-1/2 w-28 h-1 bg-slate-950 rounded-full z-50"></div>
+    </div>
+
+
+    <!-- ==================== RESET CONFIRM MODAL ==================== -->
+    <div id="reset-modal" class="hidden absolute inset-0 bg-slate-900/60 backdrop-blur-xs z-50 flex items-center justify-center p-5">
+      <div class="bg-white rounded-3xl border-b-4 border-slate-200 p-6 max-w-[280px] w-full text-center shadow-2xl relative overflow-hidden text-slate-800">
+        <div class="w-12 h-12 bg-red-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+          <i data-lucide="flame" class="w-6 h-6 text-red-500"></i>
+        </div>
+        <h3 class="text-base font-black leading-tight">
+          진행 상황을<br />정말 초기화할까요?
+        </h3>
+        <p class="text-[11px] text-slate-400 mt-2 leading-relaxed font-semibold">
+          지금까지 모은 보석과 미션 진행 기록이 모두 사라지며 처음부터 다시 모험을 시작하게 됩니다.
+        </p>
+        <div class="flex gap-2 mt-5">
+          <button onclick="closeResetModal()" class="flex-1 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-500 rounded-xl font-black text-xs cursor-pointer border-b-2 border-slate-300">
+            취소하기
+          </button>
+          <button onclick="confirmReset()" class="flex-1 py-2.5 bg-red-500 hover:bg-red-400 text-white rounded-xl font-black text-xs cursor-pointer border-b-2 border-red-700">
+            네, 초기화할래요
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ==================== JS GAME ENGINE ==================== -->
+    <script>
+      // Web Audio API Retro Sound Effects
+      class RetroSynth {
+        constructor() {
+          this.ctx = null;
+        }
+        init() {
+          if (!this.ctx) {
+            this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+          }
+          if (this.ctx && this.ctx.state === 'suspended') {
+            this.ctx.resume();
+          }
+        }
+        playTap() {
+          try {
+            this.init();
+            if (!this.ctx) return;
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(600, this.ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(150, this.ctx.currentTime + 0.1);
+            gain.gain.setValueAtTime(0.15, this.ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.1);
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+            osc.start();
+            osc.stop(this.ctx.currentTime + 0.12);
+          } catch(e) {}
+        }
+        playSuccess() {
+          try {
+            this.init();
+            if (!this.ctx) return;
+            const now = this.ctx.currentTime;
+            const notes = [523.25, 659.25, 783.99, 1046.50];
+            notes.forEach((freq, idx) => {
+              const osc = this.ctx.createOscillator();
+              const gain = this.ctx.createGain();
+              osc.type = 'triangle';
+              osc.frequency.setValueAtTime(freq, now + idx * 0.08);
+              gain.gain.setValueAtTime(0.12, now + idx * 0.08);
+              gain.gain.exponentialRampToValueAtTime(0.01, now + idx * 0.08 + 0.15);
+              osc.connect(gain);
+              gain.connect(this.ctx.destination);
+              osc.start(now + idx * 0.08);
+              osc.stop(now + idx * 0.08 + 0.2);
+            });
+          } catch(e) {}
+        }
+        playFailure() {
+          try {
+            this.init();
+            if (!this.ctx) return;
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(180, this.ctx.currentTime);
+            osc.frequency.linearRampToValueAtTime(90, this.ctx.currentTime + 0.3);
+            gain.gain.setValueAtTime(0.15, this.ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.3);
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+            osc.start();
+            osc.stop(this.ctx.currentTime + 0.32);
+          } catch(e) {}
+        }
+        playPop() {
+          try {
+            this.init();
+            if (!this.ctx) return;
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(300, this.ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(900, this.ctx.currentTime + 0.12);
+            gain.gain.setValueAtTime(0.15, this.ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.12);
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+            osc.start();
+            osc.stop(this.ctx.currentTime + 0.13);
+          } catch(e) {}
+        }
+        playRainDrop() {
+          try {
+            this.init();
+            if (!this.ctx) return;
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(800 + Math.random() * 400, this.ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(1200, this.ctx.currentTime + 0.05);
+            gain.gain.setValueAtTime(0.08, this.ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.05);
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+            osc.start();
+            osc.stop(this.ctx.currentTime + 0.06);
+          } catch(e) {}
+        }
+        playFanfare() {
+          try {
+            this.init();
+            if (!this.ctx) return;
+            const now = this.ctx.currentTime;
+            const baseNotes = [261.63, 329.63, 392.00, 523.25];
+            baseNotes.forEach((freq) => {
+              const osc = this.ctx.createOscillator();
+              const gain = this.ctx.createGain();
+              osc.type = 'triangle';
+              osc.frequency.setValueAtTime(freq, now);
+              osc.frequency.exponentialRampToValueAtTime(freq * 2, now + 0.5);
+              gain.gain.setValueAtTime(0.1, now);
+              gain.gain.exponentialRampToValueAtTime(0.005, now + 0.8);
+              osc.connect(gain);
+              gain.connect(this.ctx.destination);
+              osc.start(now);
+              osc.stop(now + 0.85);
+            });
+          } catch(e) {}
+        }
+      }
+
+      const sound = new RetroSynth();
+
+      // State Management
+      let state = {
+        userName: '',
+        currentScreen: 'intro',
+        completedStages: { stage1: false, stage2: false, stage3: false, stage4: false },
+        gems: 0,
+        userVoted: false,
+        voteCount: 1324,
+        pledgeChecked: false,
+        certIssued: false
+      };
+
+      // Load state on startup
+      function loadState() {
+        const saved = localStorage.getItem('pureuri_yidp2026_static_state');
+        if (saved) {
+          try {
+            state = JSON.parse(saved);
+          } catch(e) {}
+        }
+        updateUI();
+      }
+
+      function saveState() {
+        localStorage.setItem('pureuri_yidp2026_static_state', JSON.stringify(state));
+      }
+
+      function updateUI() {
+        // Gems
+        document.getElementById('lobby-gems').innerText = state.gems;
+        document.getElementById('vote-count-display').innerText = state.voteCount.toLocaleString() + '표';
+        document.getElementById('cert-user-name').innerText = state.userName + ' 님';
+
+        // Stage Locks/Bounces
+        const btn1 = document.getElementById('btn-unit-1');
+        const btn2 = document.getElementById('btn-unit-2');
+        const btn3 = document.getElementById('btn-unit-3');
+        const btn4 = document.getElementById('btn-unit-4');
+
+        // Reset class lists helper
+        function styleBtn(btn, status) {
+          btn.className = "w-16 h-16 rounded-full border-b-4 flex items-center justify-center shadow-lg transition-all z-10 cursor-pointer";
+          btn.disabled = false;
+          if (status === 'completed') {
+            btn.className += " bg-green-500 border-green-700 hover:bg-green-400";
+            btn.innerHTML = '<i data-lucide="check" class="w-7 h-7 text-white font-bold"></i>';
+          } else if (status === 'active') {
+            btn.className += " bg-yellow-400 border-yellow-600 hover:bg-yellow-300 animate-bounce shadow-yellow-200";
+            btn.innerHTML = '<i data-lucide="star" class="w-7 h-7 text-green-950 fill-yellow-300"></i>';
+          } else {
+            btn.className += " bg-slate-200 border-slate-400 cursor-not-allowed";
+            btn.disabled = true;
+            btn.innerHTML = '<i data-lucide="lock" class="w-6 h-6 text-slate-400"></i>';
+          }
+        }
+
+        styleBtn(btn1, state.completedStages.stage1 ? 'completed' : 'active');
+        styleBtn(btn2, state.completedStages.stage2 ? 'completed' : (state.completedStages.stage1 ? 'active' : 'locked'));
+        styleBtn(btn3, state.completedStages.stage3 ? 'completed' : (state.completedStages.stage2 ? 'active' : 'locked'));
+        styleBtn(btn4, state.completedStages.stage4 ? 'completed' : (state.completedStages.stage3 ? 'active' : 'locked'));
+
+        // Guide text inside bubble
+        let guideMsg = `안녕! ${state.userName}님, 나는 '푸리'야! 사면 붕괴 위험에 빠진 민둥산을 살려줄 1단계 유닛을 눌러 출발해 봐요!`;
+        if (state.completedStages.stage4) {
+          guideMsg = `축하해요! ${state.userName}님, 완벽한 생태 복원을 마치고 숲 지킴이가 되셨어요! 수료증을 소중히 간직하세요! 💚`;
+        } else if (state.completedStages.stage3) {
+          guideMsg = `비가 내려 캡슐들이 스스로 발아했어요! 이제 마지막 4단계 유닛을 터치해 응원 투표와 서약을 마치고 수료증을 받으세요! 🎁`;
+        } else if (state.completedStages.stage2) {
+          guideMsg = `완벽해요! 농가 폐자원으로 생분해 바이오매트를 짰네요! 이제 3단계 유닛에서 생명의 빗물을 한껏 내려볼까요? 🌧️`;
+        } else if (state.completedStages.stage1) {
+          guideMsg = `탄소 소각 대기오염 문제를 확실히 파악하셨군요! 2단계 유닛을 터치해서 버려지는 농산물로 친환경 매트를 짜보세요! ✨`;
+        }
+        document.getElementById('lobby-bubble-text').innerText = guideMsg;
+
+        lucide.createIcons();
+      }
+
+      function showScreen(screenId) {
+        // Hide all screens
+        ['screen-intro', 'screen-lobby', 'screen-stage1', 'screen-stage2', 'screen-stage3', 'screen-stage4'].forEach(id => {
+          document.getElementById(id).classList.add('hidden');
+        });
+        // Show target
+        document.getElementById(screenId).classList.remove('hidden');
+        lucide.createIcons();
+      }
+
+      function startGame(e) {
+        e.preventDefault();
+        const input = document.getElementById('user-name-input');
+        const err = document.getElementById('name-error');
+        if (!input.value.trim()) {
+          sound.playFailure();
+          err.innerText = "이름이나 닉네임을 꼭 입력해 주세요!";
+          err.classList.remove('hidden');
+          return;
+        }
+        err.classList.add('hidden');
+        state.userName = input.value.trim();
+        sound.playSuccess();
+        saveState();
+        updateUI();
+        showScreen('screen-lobby');
+      }
+
+      function goToStage(num) {
+        sound.playTap();
+        if (num === 1) {
+          initStage1();
+          showScreen('screen-stage1');
+        } else if (num === 2) {
+          initStage2();
+          showScreen('screen-stage2');
+        } else if (num === 3) {
+          initStage3();
+          showScreen('screen-stage3');
+        } else if (num === 4) {
+          initStage4();
+          showScreen('screen-stage4');
+        }
+      }
+
+      function goBackToLobby() {
+        sound.playTap();
+        updateUI();
+        showScreen('screen-lobby');
+      }
+
+
+      // ==================== UNIT 1: CARBON ====================
+      let pollutionLevel = 0;
+      let stage1QuizAnswered = false;
+
+      function renderStage1Bubble(msg, exp = 'normal') {
+        const bubbleContainer = document.getElementById('stage1-bubble-container');
+        bubbleContainer.innerHTML = `
+          <div class="flex items-center gap-3 w-full">
+            <div class="flex-shrink-0 floating-mascot">
+              <svg width="60" height="60" viewBox="0 0 60 60">
+                <rect x="14" y="18" width="32" height="34" rx="16" fill="#22c55e" />
+                <ellipse cx="30" cy="38" rx="11" ry="11" fill="#86efac" />
+                <circle cx="23" cy="28" r="3.5" fill="#1e293b" />
+                <circle cx="37" cy="28" r="3.5" fill="#1e293b" />
+                <path d="M 25 35 Q 30 ${exp==='sad'? '30':'40'} 35 35" stroke="#1e293b" stroke-width="1.5" fill="none" />
+              </svg>
+            </div>
+            <div class="relative max-w-[75%] p-4 rounded-2xl border-3 border-green-500 bg-white text-xs font-semibold leading-relaxed shadow-sm text-slate-800">
+              ${msg}
+            </div>
+          </div>
+        `;
+      }
+
+      function initStage1() {
+        pollutionLevel = 0;
+        stage1QuizAnswered = false;
+        document.getElementById('burning-flame').classList.add('hidden');
+        document.getElementById('smoke-layer').innerHTML = '';
+        document.getElementById('plastic-mesh').setAttribute('opacity', '1');
+        document.getElementById('pollution-display').innerText = '대기오염도: 0%';
+        document.getElementById('stage1-quiz').classList.add('hidden');
+        document.getElementById('quiz-feedback').classList.add('hidden');
+        document.getElementById('btn-burn').classList.remove('hidden');
+        document.getElementById('btn-burn').disabled = false;
+        
+        // Reset option styles
+        document.querySelectorAll('.quiz-opt').forEach(opt => {
+          opt.className = "quiz-opt w-full p-4 rounded-xl border-2 border-slate-800 bg-slate-900 hover:bg-slate-850 text-slate-200 text-left text-xs transition-all cursor-pointer flex justify-between items-center";
+          const icons = opt.querySelectorAll('svg');
+          if (icons) icons.forEach(i => i.remove());
+        });
+
+        // Set Next Button
+        const nextBtn = document.getElementById('btn-stage1-next');
+        nextBtn.disabled = true;
+        nextBtn.className = "w-full py-4 rounded-2xl font-black text-sm border-b-4 bg-slate-800 border-slate-900 text-slate-500 cursor-not-allowed";
+        nextBtn.innerText = "다음 미션 이동하기";
+
+        renderStage1Bubble("안타깝게도 매년 5,000만 톤의 토사 유실을 막으려 기존 플라스틱 그물망을 덮어두고 있어요. 아래의 플라스틱 매트를 터치해 소각했을 때 무슨 일이 일어나는지 직접 확인해 보세요!");
+      }
+
+      function burnPlastic() {
+        if (pollutionLevel < 100) {
+          sound.playPop();
+          pollutionLevel += 20;
+          document.getElementById('pollution-display').innerText = `대기오염도: ${pollutionLevel}%`;
+          
+          // 그물망 서서히 녹음
+          document.getElementById('plastic-mesh').setAttribute('opacity', (1 - pollutionLevel / 100).toString());
+
+          // 불꽃 활성화
+          document.getElementById('burning-flame').classList.remove('hidden');
+
+          // 연기 입자 추가
+          const smoke = document.createElement('div');
+          smoke.className = "absolute w-8 h-8 bg-slate-700/60 rounded-full blur-[6px] pointer-events-none";
+          smoke.style.bottom = "30px";
+          smoke.style.right = (50 + Math.random() * 80) + "px";
+          smoke.style.transition = "all 2s ease-out";
+          document.getElementById('smoke-layer').appendChild(smoke);
+
+          setTimeout(() => {
+            smoke.style.transform = "translateY(-140px) scale(3.5)";
+            smoke.style.opacity = "0";
+          }, 50);
+
+          if (pollutionLevel === 100) {
+            document.getElementById('btn-burn').classList.add('hidden');
+            renderStage1Bubble("하늘이 이중의 &apos;탄소 장막&apos;으로 뒤덮였어요! 소각 시 일산화탄소와 초미세먼지가 대기를 심각하게 위협한답니다. 이제 어떻게 이 문제를 해결할지 미니 퀴즈로 만나요!", "sad");
+            
+            // 퀴즈 페이드 인
+            document.getElementById('stage1-quiz').classList.remove('hidden');
+          } else {
+            renderStage1Bubble("콜록콜록! 플라스틱 매트가 타오르며 하늘이 점점 뿌옇게 그을리고 있어요!", "sad");
+          }
+        }
+      }
+
+      function checkStage1Quiz(idx) {
+        if (stage1QuizAnswered) return;
+        stage1QuizAnswered = true;
+
+        const options = document.querySelectorAll('.quiz-opt');
+        const feedback = document.getElementById('quiz-feedback');
+        
+        if (idx === 1) { // 정답
+          sound.playSuccess();
+          options[idx].className = "quiz-opt w-full p-4 rounded-xl border-2 border-green-500 bg-green-500/20 text-green-300 font-bold text-left text-xs transition-all flex justify-between items-center";
+          options[idx].innerHTML += '<i data-lucide="check-circle-2" class="w-5 h-5 text-green-400"></i>';
+          
+          feedback.className = "p-3 rounded-xl border border-green-500/30 bg-green-950/50 text-green-200 text-xs leading-relaxed";
+          feedback.innerHTML = "🎉 <strong>정답입니다!</strong> 플라스틱 토양 그물망은 1kg 소각 시 약 <strong>2.9kg</strong>의 엄청난 탄소를 배출해요. 이제 푸르리의 친환경 솔루션을 제조하러 갑시다!";
+          feedback.classList.remove('hidden');
+
+          confetti({ particleCount: 80, spread: 60, origin: { y: 0.8 } });
+
+          // Next button activation
+          const nextBtn = document.getElementById('btn-stage1-next');
+          nextBtn.disabled = false;
+          nextBtn.className = "w-full py-4 rounded-2xl font-black text-sm border-b-4 bg-green-500 border-green-700 hover:bg-green-400 text-slate-950 cursor-pointer animate-pulse";
+          nextBtn.innerHTML = "보석 10개 받고 완료하기 ✨";
+        } else {
+          sound.playFailure();
+          options[idx].className = "quiz-opt w-full p-4 rounded-xl border-2 border-red-500 bg-red-500/20 text-red-300 font-bold text-left text-xs transition-all flex justify-between items-center";
+          options[idx].innerHTML += '<i data-lucide="x-circle" class="w-5 h-5 text-red-400"></i>';
+          
+          feedback.className = "p-3 rounded-xl border border-red-500/30 bg-red-950/50 text-red-200 text-xs leading-relaxed";
+          feedback.innerHTML = "😢 <strong>아쉽지만 오답이에요!</strong> 힌트: 생각보다 매우 막대한 대기 오염 탄소가 소각 시 공기 중에 배출됩니다.";
+          feedback.classList.remove('hidden');
+
+          setTimeout(() => {
+            stage1QuizAnswered = false;
+          }, 1500);
+        }
+        lucide.createIcons();
+      }
+
+      function finishStage1() {
+        sound.playSuccess();
+        state.completedStages.stage1 = true;
+        state.gems += 10;
+        saveState();
+        goBackToLobby();
+      }
+
+
+      // ==================== UNIT 2: BIOMAT ====================
+      let biomatState = {
+        cornStalk: 0,
+        riceStraw: 0,
+        juteThred: 0
+      };
+      let matPins = 0;
+      let currentStage2Step = 'weaving'; // 'weaving' | 'pinning' | 'complete'
+
+      function renderStage2Bubble(msg, exp = 'normal') {
+        const bubbleContainer = document.getElementById('stage2-bubble-container');
+        bubbleContainer.innerHTML = `
+          <div class="flex items-center gap-3 w-full">
+            <div class="flex-shrink-0 floating-mascot">
+              <svg width="60" height="60" viewBox="0 0 60 60">
+                <rect x="14" y="18" width="32" height="34" rx="16" fill="#22c55e" />
+                <ellipse cx="30" cy="38" rx="11" ry="11" fill="#86efac" />
+                <circle cx="23" cy="28" r="3.5" fill="#1e293b" />
+                <circle cx="37" cy="28" r="3.5" fill="#1e293b" />
+                <path d="M 25 35 Q 30 40 35 35" stroke="#1e293b" stroke-width="1.5" fill="none" />
+              </svg>
+            </div>
+            <div class="relative max-w-[75%] p-4 rounded-2xl border-3 border-green-500 bg-white text-xs font-semibold leading-relaxed shadow-sm text-slate-800">
+              ${msg}
+            </div>
+          </div>
+        `;
+      }
+
+      function initStage2() {
+        biomatState = { cornStalk: 0, riceStraw: 0, juteThred: 0 };
+        matPins = 0;
+        currentStage2Step = 'weaving';
+
+        document.getElementById('stage2-weaving-area').classList.remove('hidden');
+        document.getElementById('stage2-pinning-area').classList.add('hidden');
+        document.getElementById('stage2-complete-area').classList.add('hidden');
+        
+        document.getElementById('weaving-visual').innerHTML = '';
+        document.getElementById('bamboo-pins-container').innerHTML = '';
+
+        document.getElementById('cnt-corn').innerText = "0 / 3";
+        document.getElementById('cnt-straw').innerText = "0 / 3";
+        document.getElementById('cnt-jute').innerText = "0 / 3";
+        document.getElementById('weave-percent').innerText = "0%";
+        document.getElementById('pin-count-display').innerText = "0 / 5개";
+
+        // Enable buttons
+        document.getElementById('mat-corn').disabled = false;
+        document.getElementById('mat-straw').disabled = false;
+        document.getElementById('mat-jute').disabled = false;
+
+        // Reset stage next button
+        const nextBtn = document.getElementById('btn-stage2-next');
+        nextBtn.disabled = true;
+        nextBtn.className = "w-full py-4 rounded-2xl font-black text-sm border-b-4 bg-slate-200 border-slate-300 text-slate-400 cursor-not-allowed";
+        nextBtn.innerText = "대나무 핀 설치로 넘어가기";
+
+        renderStage2Bubble("농가에서 처치 곤란해 함부로 태우거나 버리던 농업 부산물(옥수수대, 볏짚, 황마)을 엮어 100% 생분해 바이오매트를 짜봅시다! 재료 버튼을 각각 3번씩 탭해 채워보세요!");
+      }
+
+      function addMaterial(type) {
+        if (biomatState[type] < 3) {
+          sound.playPop();
+          biomatState[type]++;
+          
+          // 카운트 UI 갱신
+          const displayId = type === 'cornStalk' ? 'cnt-corn' : (type === 'riceStraw' ? 'cnt-straw' : 'cnt-jute');
+          document.getElementById(displayId).innerText = `${biomatState[type]} / 3`;
+
+          // 직조 비주얼 레이어 실시간 생성
+          const visual = document.getElementById('weaving-visual');
+          const element = document.createElement('div');
+          
+          if (type === 'cornStalk') {
+            element.className = "h-3 w-16 bg-yellow-400 border border-yellow-600 rounded-full opacity-80 transition-all duration-300 transform scale-0";
+          } else if (type === 'riceStraw') {
+            element.className = "h-2.5 w-20 bg-amber-300 border border-amber-500 rounded opacity-85 rotate-[-3deg] transition-all duration-300 transform scale-0";
+          } else {
+            element.className = "h-1.5 w-24 bg-orange-400/80 rounded-full shadow-sm transition-all duration-300 transform scale-0";
+          }
+          visual.appendChild(element);
+          setTimeout(() => element.classList.remove('scale-0'), 20);
+
+          // 직조도 퍼센트 계산
+          const total = biomatState.cornStalk + biomatState.riceStraw + biomatState.juteThred;
+          const percent = Math.round((total / 9) * 100);
+          document.getElementById('weave-percent').innerText = `${percent}%`;
+
+          if (biomatState[type] === 3) {
+            const btnId = type === 'cornStalk' ? 'mat-corn' : (type === 'riceStraw' ? 'mat-straw' : 'mat-jute');
+            document.getElementById(btnId).disabled = true;
+            document.getElementById(btnId).classList.add('opacity-50');
+          }
+
+          if (percent === 100) {
+            renderStage2Bubble("매트가 완벽하게 다 짜여졌어요! 이제 우측 하단의 노란 다음 버튼을 터치해 흙사면에 대나무 핀을 박으러 가요!");
+            
+            const nextBtn = document.getElementById('btn-stage2-next');
+            nextBtn.disabled = false;
+            nextBtn.className = "w-full py-4 rounded-2xl font-black text-sm border-b-4 bg-green-500 border-green-700 hover:bg-green-400 text-white cursor-pointer animate-pulse";
+          }
+        }
+      }
+
+      function nextStage2Step() {
+        sound.playTap();
+        if (currentStage2Step === 'weaving') {
+          currentStage2Step = 'pinning';
+          document.getElementById('stage2-weaving-area').classList.add('hidden');
+          document.getElementById('stage2-pinning-area').classList.remove('hidden');
+
+          // 핀박기 가이드 대사
+          renderStage2Bubble("짜여진 생분해 매트를 토양 사면에 펼쳤어요! 대나무 고정핀을 땅에 꽉 박기 위해 설치 버튼을 힘차게 5번 탭하세요!");
+
+          const nextBtn = document.getElementById('btn-stage2-next');
+          nextBtn.disabled = true;
+          nextBtn.className = "w-full py-4 rounded-2xl font-black text-sm border-b-4 bg-slate-200 border-slate-300 text-slate-400 cursor-not-allowed";
+          nextBtn.innerText = "미션 완료 및 보상받기";
+        } else if (currentStage2Step === 'complete') {
+          // 완료
+          state.completedStages.stage2 = true;
+          state.gems += 15;
+          saveState();
+          goBackToLobby();
+        }
+      }
+
+      function hammerPin() {
+        if (matPins < 5) {
+          sound.playTap();
+          matPins++;
+          document.getElementById('pin-count-display').innerText = `${matPins} / 5개`;
+
+          // 대나무 핀 엘리먼트 동적 꽂음 연출
+          const container = document.getElementById('bamboo-pins-container');
+          const pin = document.createElement('div');
+          pin.className = "absolute w-2.5 h-6 bg-emerald-600 rounded-full border border-emerald-800 shadow-sm transition-all duration-300 transform -translate-y-12 opacity-0";
+          pin.style.left = `${20 + (matPins - 1) * 15}%`;
+          pin.style.bottom = `${15 + (matPins - 1) * 7.5}%`;
+          pin.style.transform = 'rotate(-25deg)';
+
+          // 디테일 심 자국 추가
+          const dot = document.createElement('div');
+          dot.className = "w-1 h-3 bg-emerald-400 mx-auto rounded-full mt-0.5";
+          pin.appendChild(dot);
+          container.appendChild(pin);
+
+          setTimeout(() => {
+            pin.classList.remove('opacity-0', '-translate-y-12');
+          }, 30);
+
+          if (matPins === 5) {
+            sound.playSuccess();
+            confetti({ particleCount: 100, spread: 70, origin: { y: 0.8 } });
+            
+            currentStage2Step = 'complete';
+            document.getElementById('stage2-pinning-area').classList.add('hidden');
+            document.getElementById('stage2-complete-area').classList.remove('hidden');
+
+            renderStage2Bubble("정말 훌륭한 솜씨예요! 100% 천연 성분으로 직조된 매트가 대지를 빈틈없이 지켰어요! 거름이 되기 전 생태계를 되살려 볼까요?", "excited");
+
+            const nextBtn = document.getElementById('btn-stage2-next');
+            nextBtn.disabled = false;
+            nextBtn.className = "w-full py-4 rounded-2xl font-black text-sm border-b-4 bg-yellow-400 border-yellow-600 hover:bg-yellow-300 text-green-950 cursor-pointer";
+            nextBtn.innerHTML = "보석 15개 받고 완료하기 ✨";
+          }
+        }
+      }
+
+
+      // ==================== UNIT 3: RAIN FOREST ====================
+      let waterLevel = 0;
+
+      function renderStage3Bubble(msg, exp = 'normal') {
+        const bubbleContainer = document.getElementById('stage3-bubble-container');
+        bubbleContainer.innerHTML = `
+          <div class="flex items-center gap-3 w-full">
+            <div class="flex-shrink-0 floating-mascot">
+              <svg width="60" height="60" viewBox="0 0 60 60">
+                <rect x="14" y="18" width="32" height="34" rx="16" fill="#22c55e" />
+                <ellipse cx="30" cy="38" rx="11" ry="11" fill="#86efac" />
+                <circle cx="23" cy="28" r="3.5" fill="#1e293b" />
+                <circle cx="37" cy="28" r="3.5" fill="#1e293b" />
+                <path d="M 25 35 Q 30 40 35 35" stroke="#1e293b" stroke-width="1.5" fill="none" />
+              </svg>
+            </div>
+            <div class="relative max-w-[75%] p-4 rounded-2xl border-3 border-green-500 bg-white text-xs font-semibold leading-relaxed shadow-sm text-slate-800">
+              ${msg}
+            </div>
+          </div>
+        `;
+      }
+
+      function initStage3() {
+        waterLevel = 0;
+        document.getElementById('biomat-absorb').setAttribute('opacity', '0.9');
+        document.getElementById('water-level-display').innerText = '0%';
+        document.getElementById('plants-container').innerHTML = '';
+        document.getElementById('forest-success-banner').classList.add('hidden');
+        document.getElementById('btn-rain').disabled = false;
+        document.getElementById('btn-rain').classList.remove('opacity-50');
+
+        // Reset Stage 3 next btn
+        const nextBtn = document.getElementById('btn-stage3-next');
+        nextBtn.disabled = true;
+        nextBtn.className = "w-full py-4 rounded-2xl font-black text-sm border-b-4 bg-slate-200 border-slate-300 text-slate-400 cursor-not-allowed";
+        nextBtn.innerText = "보석 20개 받고 마지막 유닛 이동!";
+
+        renderStage3Bubble("매트 내부에는 수용성 친환경 코팅으로 싸여 쓸려나가지 않는 씨앗 캡슐이 숨어있어요. 비 내리기 버튼을 연타하여 대지를 촉촉이 적셔보세요!");
+      }
+
+      function rainOnSlope() {
+        if (waterLevel < 100) {
+          sound.playRainDrop();
+          waterLevel += 20;
+          document.getElementById('water-level-display').innerText = `${waterLevel}%`;
+
+          // 매트가 빗물에 서서히 흡수되어 땅으로 부드럽게 녹아듬
+          document.getElementById('biomat-absorb').setAttribute('opacity', (1 - waterLevel / 110).toString());
+
+          // 빗방울 드롭 시각효과
+          const rainLayer = document.getElementById('rain-drops-layer');
+          for (let i = 0; i < 5; i++) {
+            const drop = document.createElement('div');
+            drop.className = "absolute w-0.5 h-6 bg-sky-200/80 rounded-full";
+            drop.style.left = (10 + Math.random() * 80) + "%";
+            drop.style.top = "-20px";
+            drop.style.transition = "all 0.6s linear";
+            rainLayer.appendChild(drop);
+
+            setTimeout(() => {
+              drop.style.transform = "translateY(280px)";
+              drop.style.opacity = "0";
+            }, 30);
+
+            setTimeout(() => drop.remove(), 700);
+          }
+
+          // 생명의 자생 식물 발아 시각화
+          const plants = document.getElementById('plants-container');
+
+          if (waterLevel === 20) {
+            renderStage3Bubble("빗물에 씨앗 캡슐이 스르르 스스로 녹아내리며 싹틀 채비를 마쳤어요!");
+          } else if (waterLevel === 40) {
+            renderStage3Bubble("우와! 작고 부드러운 새싹들의 수줍은 첫 발아가 시작되었어요! 🌱", "happy");
+            // 새싹 생성
+            plants.innerHTML += `
+              <div class="absolute left-[24%] bottom-[40%] origin-bottom transition-all duration-500 scale-100" id="sprout-1">
+                <svg width="20" height="30" viewBox="0 0 20 30">
+                  <path d="M 10 30 Q 8 15 12 0" stroke="#22c55e" stroke-width="2.5" fill="none" />
+                  <path d="M 12 5 Q 18 2 15 10" fill="#4ade80" />
+                </svg>
+              </div>
+            `;
+          } else if (waterLevel === 60) {
+            renderStage3Bubble("대나무 핀과 식물의 유기적 뿌리 발달이 토양을 아주 꽉 쥐어주어 2차 사면 붕괴를 영구 방지합니다!");
+            // 뿌리 시각화 및 두번째 새싹
+            plants.innerHTML += `
+              <div class="absolute left-[49%] bottom-[50%] origin-bottom transition-all duration-500 scale-100" id="sprout-2">
+                <svg width="20" height="30" viewBox="0 0 20 30">
+                  <path d="M 10 30 Q 12 12 7 0" stroke="#22c55e" stroke-width="2.5" fill="none" />
+                  <path d="M 7 2 Q 1 1 3 9" fill="#4ade80" />
+                </svg>
+              </div>
+            `;
+          } else if (waterLevel === 80) {
+            renderStage3Bubble("엄청난 속도로 자라고 있어요! 인위적인 화학 비료 없이도 매트 거름만으로 완벽한 영양분이 공급돼요!", "excited");
+            // 세번째 새싹 및 기존 싹 거대화
+            plants.innerHTML += `
+              <div class="absolute left-[74%] bottom-[60%] origin-bottom transition-all duration-500 scale-100" id="sprout-3">
+                <svg width="20" height="30" viewBox="0 0 20 30">
+                  <path d="M 10 30 Q 9 16 11 0" stroke="#22c55e" stroke-width="2.5" fill="none" />
+                  <path d="M 11 4 Q 17 0 14 8" fill="#4ade80" />
+                </svg>
+              </div>
+            `;
+            document.getElementById('sprout-1').className += ' scale-150';
+          } else if (waterLevel === 100) {
+            sound.playSuccess();
+            confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
+
+            // 꽃 피고 나비 소환
+            plants.innerHTML += `
+              <div class="absolute left-[54%] bottom-[58%] text-red-500 text-sm animate-bounce">🌸</div>
+              <div class="absolute left-[28%] bottom-[48%] text-yellow-500 text-xs animate-bounce">🌼</div>
+              <div class="absolute left-1/3 top-12 text-sm" id="butterfly">🦋</div>
+            `;
+            // 나비 간단 좌우 비행 애니메이션
+            const bf = document.getElementById('butterfly');
+            bf.style.transition = "all 4s ease-in-out";
+            setTimeout(() => {
+              bf.style.transform = "translate(50px, -20px) rotate(15deg)";
+            }, 100);
+
+            document.getElementById('forest-success-banner').classList.remove('hidden');
+            document.getElementById('btn-rain').disabled = true;
+            document.getElementById('btn-rain').classList.add('opacity-50');
+
+            renderStage3Bubble("기적처럼 파괴되었던 사면 대지가 아름답고 무성한 야생 숲으로 완전하게 되살아났어요! 자원 순환의 기적입니다!", "excited");
+
+            // 활성화 다음 버튼
+            const nextBtn = document.getElementById('btn-stage3-next');
+            nextBtn.disabled = false;
+            nextBtn.className = "w-full py-4 rounded-2xl font-black text-sm border-b-4 bg-yellow-400 border-yellow-600 hover:bg-yellow-300 text-green-950 cursor-pointer animate-pulse";
+          }
+        }
+      }
+
+      function resetRain() {
+        initStage3();
+      }
+
+      function finishStage3() {
+        sound.playSuccess();
+        state.completedStages.stage3 = true;
+        state.gems += 20;
+        saveState();
+        goBackToLobby();
+      }
+
+
+      // ==================== UNIT 4: VOTE & CERTIFICATE ====================
+      function renderStage4Bubble(msg, exp = 'normal') {
+        const bubbleContainer = document.getElementById('stage4-bubble-container');
+        bubbleContainer.innerHTML = `
+          <div class="flex items-center gap-3 w-full">
+            <div class="flex-shrink-0 floating-mascot">
+              <svg width="60" height="60" viewBox="0 0 60 60">
+                <rect x="14" y="18" width="32" height="34" rx="16" fill="#22c55e" />
+                <ellipse cx="30" cy="38" rx="11" ry="11" fill="#86efac" />
+                <circle cx="23" cy="28" r="3.5" fill="#1e293b" />
+                <circle cx="37" cy="28" r="3.5" fill="#1e293b" />
+                <path d="M 25 35 Q 30 40 35 35" stroke="#1e293b" stroke-width="1.5" fill="none" />
+              </svg>
+            </div>
+            <div class="relative max-w-[75%] p-4 rounded-2xl border-3 border-green-500 bg-white text-xs font-semibold leading-relaxed shadow-sm text-slate-800">
+              ${msg}
+            </div>
+          </div>
+        `;
+      }
+
+      function initStage4() {
+        document.getElementById('vote-form-panel').classList.remove('hidden');
+        document.getElementById('certificate-panel').classList.add('hidden');
+        document.getElementById('pledge-checkbox').checked = state.pledgeChecked;
+
+        // Reset Vote Button
+        const voteBtn = document.getElementById('btn-vote');
+        if (state.userVoted) {
+          voteBtn.disabled = true;
+          voteBtn.className = "w-full py-3 rounded-xl font-black text-xs border-b-4 bg-slate-100 border-slate-300 text-slate-400 cursor-not-allowed";
+          voteBtn.innerHTML = '<i data-lucide="check" class="w-4 h-4"></i> 투표를 완료하셨습니다! 감사합니다 💚';
+        } else {
+          voteBtn.disabled = false;
+          voteBtn.className = "w-full py-3 rounded-xl font-black text-xs border-b-4 bg-rose-500 border-rose-700 hover:bg-rose-400 text-white flex items-center justify-center gap-1.5 shadow-md transition-all cursor-pointer";
+          voteBtn.innerHTML = '<i data-lucide="heart" class="w-4 h-4 fill-current"></i> 푸르리 팀에게 투표하기!';
+        }
+
+        updateCertificateButton();
+        renderStage4Bubble(`마지막 최종 관문이에요, ${state.userName}님! 저희 푸르리 팀이 BMW 영 이노베이터 환경 본선에 우뚝 설 수 있도록 응원 표를 주시고 지구 지킴이 약속에 동의해 주세요!`, "excited");
+      }
+
+      function castVote() {
+        if (!state.userVoted) {
+          sound.playSuccess();
+          state.userVoted = true;
+          state.voteCount += 1;
+          state.gems += 30; // 보너스 보석 증정
+          saveState();
+
+          confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
+
+          // UI 갱신
+          document.getElementById('vote-count-display').innerText = state.voteCount.toLocaleString() + '표';
+          
+          const voteBtn = document.getElementById('btn-vote');
+          voteBtn.disabled = true;
+          voteBtn.className = "w-full py-3 rounded-xl font-black text-xs border-b-4 bg-slate-100 border-slate-300 text-slate-400 cursor-not-allowed";
+          voteBtn.innerHTML = '<i data-lucide="check" class="w-4 h-4"></i> 투표를 완료하셨습니다! 감사합니다 💚';
+
+          renderStage4Bubble("우와! 정말 소중한 응원 한 표 감사합니다! 💚 이제 서약 실천 동의를 하시고 최종 명예 수료증을 떳떳하게 발급하세요!", "excited");
+
+          updateCertificateButton();
+          lucide.createIcons();
+        }
+      }
+
+      function togglePledge(checked) {
+        sound.playTap();
+        state.pledgeChecked = checked;
+        saveState();
+        updateCertificateButton();
+      }
+
+      function updateCertificateButton() {
+        const nextBtn = document.getElementById('btn-stage4-next');
+        // 서약 실천 동의(체크박스)가 완료되면 수료증 발급하기 버튼 즉시 활성화!
+        if (state.pledgeChecked) {
+          nextBtn.disabled = false;
+          nextBtn.className = "w-full py-4 rounded-2xl font-black text-sm border-b-4 bg-green-500 border-green-700 hover:bg-green-400 text-white cursor-pointer animate-pulse";
+        } else {
+          nextBtn.disabled = true;
+          nextBtn.className = "w-full py-4 rounded-2xl font-black text-sm border-b-4 bg-slate-200 border-slate-300 text-slate-400 cursor-not-allowed";
+        }
+      }
+
+      function issueCertificate() {
+        if (state.pledgeChecked) {
+          // 만약 투표를 깜빡했더라도 수료증 발급 시 함께 자동으로 표를 더해 막힘없는 환경 선사!
+          if (!state.userVoted) {
+            state.userVoted = true;
+            state.voteCount += 1;
+            state.gems += 30;
+          }
+
+          sound.playFanfare();
+          state.certIssued = true;
+          state.completedStages.stage4 = true;
+          saveState();
+
+          confetti({ particleCount: 180, spread: 100, origin: { y: 0.5 } });
+
+          // 패널 전환
+          document.getElementById('vote-form-panel').classList.add('hidden');
+          document.getElementById('certificate-panel').classList.remove('hidden');
+
+          // 아래 하단 버튼 완료로 갱신
+          const nextBtn = document.getElementById('btn-stage4-next');
+          nextBtn.setAttribute('onclick', 'finishStage4()');
+          nextBtn.className = "w-full py-4 bg-yellow-400 hover:bg-yellow-300 text-green-950 rounded-2xl font-black text-sm border-b-4 border-yellow-600 shadow-lg flex items-center justify-center gap-1.5 cursor-pointer";
+          nextBtn.innerHTML = '<i data-lucide="check" class="w-5 h-5"></i> 모든 체험 완료하고 홈으로 가기';
+
+          renderStage4Bubble(`감격스러워요! 명예로운 푸르리 토양 수호 지킴이가 되셨습니다! 수료증을 소지하고 평생 자연 보호를 약속해 주셔서 감사합니다! 🎁`, "excited");
+
+          updateUI();
+          lucide.createIcons();
+        }
+      }
+
+      function finishStage4() {
+        sound.playTap();
+        goBackToLobby();
+      }
+
+
+      // ==================== RESET LOGIC ====================
+      function openResetModal() {
+        sound.playTap();
+        document.getElementById('reset-modal').classList.remove('hidden');
+      }
+
+      function closeResetModal() {
+        sound.playTap();
+        document.getElementById('reset-modal').classList.add('hidden');
+      }
+
+      function confirmReset() {
+        sound.playFailure();
+        state = {
+          userName: '',
+          currentScreen: 'intro',
+          completedStages: { stage1: false, stage2: false, stage3: false, stage4: false },
+          gems: 0,
+          userVoted: false,
+          voteCount: 1324,
+          pledgeChecked: false,
+          certIssued: false
+        };
+        saveState();
+        document.getElementById('reset-modal').classList.add('hidden');
+        
+        // Reset Inputs
+        document.getElementById('user-name-input').value = '';
+        document.getElementById('name-error').classList.add('hidden');
+
+        // Reset Stage 4 buttons back
+        const nextBtn = document.getElementById('btn-stage4-next');
+        nextBtn.setAttribute('onclick', 'issueCertificate()');
+        nextBtn.innerHTML = '<i data-lucide="award" class="w-4 h-4 mr-1"></i> 친환경 지킴이 수료증 발급하기';
+
+        // Go to Intro
+        showScreen('screen-intro');
+      }
+
+      // App Init on DOM Load
+      window.addEventListener('DOMContentLoaded', () => {
+        loadState();
+        if (state.userName) {
+          showScreen('screen-lobby');
+        } else {
+          showScreen('screen-intro');
+        }
+        lucide.createIcons();
+      });
+    </script>
+  </body>
+</html>
